@@ -28,7 +28,7 @@ GEM
       builder (~> 3.1)
     activerecord (4.2.8)
       activemodel (= 4.2.8)
-      activesupport (= 4.2.5)
+      activesupport (= 4.2.8)
       arel (~> 6.0)
     activesupport (4.2.8)
       i18n (~> 0.7)
