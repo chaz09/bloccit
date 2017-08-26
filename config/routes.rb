@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   get 'welcome/contact'
 
-  root 'welcome#index'
+  get 'welcome/faq'
+
+  root to: 'welcome#index'
  :products
 
 
