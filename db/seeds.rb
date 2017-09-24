@@ -11,7 +11,7 @@ require 'random_data'
 
  5.times do
    User.create!(
-
+ # #3
    name:     RandomData.random_name,
    email:    RandomData.random_email,
    password: RandomData.random_sentence
@@ -19,6 +19,7 @@ require 'random_data'
  end
  users = User.all
 
+#create topics
 15.times do
    Topic.create!(
      name:         RandomData.random_sentence,
@@ -26,7 +27,7 @@ require 'random_data'
    )
  end
  topics = Topic.all
-
+ # Create Posts
  50.times do
    Post.create!(
    user:   users.sample,
@@ -40,6 +41,7 @@ require 'random_data'
  # Create Comments
  100.times do
    Comment.create!(
+   user: users.sample,
      post: posts.sample,
      body: RandomData.random_paragraph
    )
@@ -54,6 +56,7 @@ require 'random_data'
   )
 end
 
+# Create an admin user
 admin = User.create!(
   name:     'Admin User',
   email:    'admin@example.com',
