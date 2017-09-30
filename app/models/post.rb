@@ -3,8 +3,11 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
 after_create :create_vote
+after_create :create_favorite
+
 default_scope { order('rank DESC') }
   scope :ordered_by_title, -> {order('title DESC')}
   scope :ordered_by_reverse_created_at, -> {order('title ASC')}
@@ -14,17 +17,14 @@ default_scope { order('rank DESC') }
   validates :user, presence: true
 
   def up_votes
-# #9
     votes.where(value: 1).count
   end
 
   def down_votes
-# #10
     votes.where(value: -1).count
   end
 
   def points
-# #11
     votes.sum(:value)
   end
   def update_rank
@@ -37,4 +37,9 @@ default_scope { order('rank DESC') }
    def create_vote
       user.votes.create(value: 1, post:self)
 end
+
+   def create_favorite
+     Favorite.create(post: self, user: self.user)
+     FavoriteMailer.new_post(self).devlier_now
 end
+end 
